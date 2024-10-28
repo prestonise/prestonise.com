@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { type CollectionPosts } from '@/types'
+import { getPosts } from '@/utils/posts'
+
+export async function getStaticPaths() {
+  const posts = await getPosts()
+  return posts.map((post: { slug: any }) => {
+    return {
+      params: { slug: post.slug },
+      props: {
+        post,
+      },
+    }
+  })
+}
+
+type Props = { post: CollectionPosts }
+
+const { post } = Astro.props
+const { title, image, description, date, duration, tag } = post.data
+
+const { Content } = await post.render()
+
+function getDate(date: string) {
+  return new Date(date).toISOString()
+}
+---
+
+<BaseLayout title={title} description={description} pageType="article">
+  <article class="prose">
+    <h1>{title}</h1>
+    <p class="op-50">
+      {date && <time datetime={getDate(date)}>{date.split(',')}</time>}
+      {duration && <span> | {duration}</span>}
+      {tag && <span> | {tag}</span>}
+    </p>
+    {
+      image && (
+        <p>
+          <img width="640" height="360" src={image.src} alt={image.alt || ''} />
+        </p>
+      )
+    }
+    <div id="body-text"><Content /></div>
+    <script
+      is:inline
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.getElementById('body-text'), {
+      // customised options
+      // • auto-render specific keys, e.g.:
+      delimiters: [
+          {left: '$$', right: '$$', display: true},
+          {left: '$', right: '$', display: false},
+          {left: '\\(', right: '\\)', display: false},
+          {left: '\\[', right: '\\]', display: true}
+      ],
+      // • rendering keys, e.g.:
+      throwOnError : false
+    });"
+    ></script>
+  </article>
+</BaseLayout>

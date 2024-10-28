@@ -1,0 +1,25 @@
+---
+import { projectData } from './data'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import ListProjects from '@/components/ListProjects.vue'
+---
+
+<BaseLayout title="Projects" description="List of projects that I am proud of">
+  <h1 class="mb-10 text-3xl font-bold">Projects</h1>
+  <div mb-16 sm:mb-24>
+    {
+      projectData.length > 0 && (
+        <div>
+          {projectData.map((i) => (
+            <div class="mb-10">
+              <h2 class="select-none relative h8 pointer-events-none">
+                <span class="font-bold op35 dark:op20 absolute top-0">{i.title}</span>
+              </h2>
+              <ListProjects list={i.projects} />
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>
