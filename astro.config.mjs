@@ -3,6 +3,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import UnoCSS from 'unocss/astro'
 import vue from '@astrojs/vue'
+import awsAmplify from 'astro-aws-amplify'
 
 export default defineConfig({
   site: 'https://www.prestonise.com',
@@ -17,6 +18,7 @@ export default defineConfig({
     }),
     vue(),
   ],
+  adapter: awsAmplify(),
   markdown: {
     shikiConfig: {
       themes: {
