@@ -19,6 +19,7 @@ export default defineConfig({
     vue(),
   ],
   adapter: awsAmplify(),
+  output: 'server',
   markdown: {
     shikiConfig: {
       themes: {
