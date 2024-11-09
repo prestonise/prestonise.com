@@ -28,12 +28,12 @@ export function Testimonial() {
         </div>
         <Card color="transparent" shadow={false} className="pb-8 lg:flex-row">
           <CardBody className="w-full lg:gap-10 lg:!flex justify-between ">
-            <div className="rounded-lg w-full flex justify-between gap-x-8">
+            <div className="rounded-lg w-full lg:flex justify-between gap-x-8">
             {TESTIMONIALS.map((t) => {
-              return <div key={t.id} className="flex-row">
-                {t.id === 0 ? <CodeBracketSquareIcon className="h-8" /> : null}
-                {t.id === 1 ? <LightBulbIcon className="h-8" /> : null}
-                {t.id === 2 ? <BoltIcon className="h-8" /> : null}
+              return <div key={t.id} className="flex-row sm:mb-[3rem]">
+                {t.id === 0 ? <CodeBracketSquareIcon className="h-8 hidden md:block" /> : null}
+                {t.id === 1 ? <LightBulbIcon className="h-8 hidden md:block" /> : null}
+                {t.id === 2 ? <BoltIcon className="h-8 hidden md:block" /> : null}
                 <Typography
                   variant="paragraph"
                   color="blue-gray"
