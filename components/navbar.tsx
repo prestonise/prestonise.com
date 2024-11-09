@@ -5,7 +5,6 @@ import Image from "next/image";
 import {
   Navbar as MTNavbar,
   Collapse,
-  Button,
   IconButton,
   Typography,
 } from "@material-tailwind/react";
